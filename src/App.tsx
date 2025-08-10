@@ -1,45 +1,18 @@
-import React, { useState } from 'react';
-import Header from './components/Header';
-import HomePage from './components/HomePage';
-import GeneDatabase from './components/GeneDatabase';
-import VirtualLab from './components/VirtualLab';
-import GeneLibrary from './components/GeneLibrary';
+import { useState } from 'react';
+import Header from './components/header';
+import GeneDatabase from './components/gene-database';
+import VirtualLab from './components/virtual-lab';
 
-interface Gene {
-  id: string;
-  name: string;
-  function: string;
-  organism: string;
-  location: string;
-  type: string;
-  properties: string[];
-}
-
-function App() {
-  const [activeTab, setActiveTab] = useState('home');
-  const [selectedGenes, setSelectedGenes] = useState<Gene[]>([]);
-
-  const renderActiveTab = () => {
-    switch (activeTab) {
-      case 'home':
-        return <HomePage setActiveTab={setActiveTab} />;
-      case 'database':
-        return <GeneDatabase selectedGenes={selectedGenes} setSelectedGenes={setSelectedGenes} setActiveTab={setActiveTab} />;
-      case 'lab':
-        return <VirtualLab selectedGenes={selectedGenes} setActiveTab={setActiveTab} />;
-      case 'library':
-        return <GeneLibrary />;
-      default:
-        return <HomePage />;
-    }
-  };
+export default function App() {
+  const [activeTab, setActiveTab] = useState('database'); // Default to Gene Database
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
-      {renderActiveTab()}
+      <main className="max-w-7xl mx-auto p-4">
+        {activeTab === 'database' && <GeneDatabase />}
+        {activeTab === 'lab' && <VirtualLab />}
+      </main>
     </div>
   );
 }
-
-export default App;
