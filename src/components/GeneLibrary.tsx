@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BookOpen, Share2, Download, Trash2, Eye, Plus, Beaker } from 'lucide-react';
 
 interface SavedExperiment {
