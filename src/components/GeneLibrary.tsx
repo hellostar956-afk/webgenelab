@@ -56,8 +56,32 @@ const sampleExperiments: SavedExperiment[] = [
 ];
 
 export default function GeneLibrary() {
-  const [experiments] = useState<SavedExperiment[]>(sampleExperiments);
+  const [experiments, setExperiments] = useState<SavedExperiment[]>(sampleExperiments);
   const [selectedExperiment, setSelectedExperiment] = useState<SavedExperiment | null>(null);
+
+  // Load experiments from localStorage on component mount
+  useEffect(() => {
+    const savedExperiments = JSON.parse(localStorage.getItem('savedExperiments') || '[]');
+    if (savedExperiments.length > 0) {
+      setExperiments([...sampleExperiments, ...savedExperiments]);
+    }
+  }, []);
+
+  const deleteExperiment = (experimentId: string) => {
+    // Remove from state
+    const updatedExperiments = experiments.filter(exp => exp.id !== experimentId);
+    setExperiments(updatedExperiments);
+    
+    // Update localStorage (only remove user-created experiments)
+    const savedExperiments = JSON.parse(localStorage.getItem('savedExperiments') || '[]');
+    const updatedSaved = savedExperiments.filter((exp: SavedExperiment) => exp.id !== experimentId);
+    localStorage.setItem('savedExperiments', JSON.stringify(updatedSaved));
+    
+    // Clear selection if deleted experiment was selected
+    if (selectedExperiment?.id === experimentId) {
+      setSelectedExperiment(null);
+    }
+  };
 
   const getTypeColor = (type: string) => {
     switch (type) {
@@ -153,7 +177,10 @@ export default function GeneLibrary() {
                         <button className="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-lg transition-colors">
                           <Download className="w-4 h-4" />
                         </button>
-                        <button className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition-colors">
+                        <button 
+                          onClick={() => deleteExperiment(experiment.id)}
+                          className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition-colors"
+                        >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>

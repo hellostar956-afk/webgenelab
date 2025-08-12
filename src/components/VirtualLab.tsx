@@ -22,6 +22,9 @@ interface ExperimentResult {
   properties: string[];
   risks: string[];
   viability: number;
+  id: string;
+  dateCreated: string;
+  genes: string[];
 }
 
 export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabProps) {
@@ -30,6 +33,7 @@ export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabPr
   const [draggedGene, setDraggedGene] = useState<Gene | null>(null);
   const [isSimulating, setIsSimulating] = useState(false);
   const [result, setResult] = useState<ExperimentResult | null>(null);
+  const [showSaveSuccess, setShowSaveSuccess] = useState(false);
 
   const startEditing = () => {
     setEditedGenes([...selectedGenes]);
@@ -63,7 +67,10 @@ export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabPr
         newOrganism: `Engineered ${editedGenes[0]?.organism || 'Organism'}`,
         properties: uniqueProperties,
         risks: risks,
-        viability: Math.round(viability * 100)
+        viability: Math.round(viability * 100),
+        id: `exp_${Date.now()}`,
+        dateCreated: new Date().toISOString().split('T')[0],
+        genes: editedGenes.map(gene => gene.name)
       };
 
       setResult(newResult);
@@ -78,6 +85,35 @@ export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabPr
     setResult(null);
   };
 
+  const saveToLibrary = () => {
+    if (result) {
+      // Get existing experiments from localStorage
+      const existingExperiments = JSON.parse(localStorage.getItem('savedExperiments') || '[]');
+      
+      // Create new experiment object
+      const newExperiment = {
+        id: result.id,
+        name: result.newOrganism,
+        organism: result.newOrganism,
+        genes: result.genes,
+        viability: result.viability,
+        dateCreated: result.dateCreated,
+        properties: result.properties,
+        type: result.success ? 'success' : (result.viability > 30 ? 'partial' : 'failed'),
+        risks: result.risks
+      };
+      
+      // Add to experiments array
+      existingExperiments.push(newExperiment);
+      
+      // Save back to localStorage
+      localStorage.setItem('savedExperiments', JSON.stringify(existingExperiments));
+      
+      // Show success message
+      setShowSaveSuccess(true);
+      setTimeout(() => setShowSaveSuccess(false), 3000);
+    }
+  };
   const handleDragStart = (gene: Gene) => {
     setDraggedGene(gene);
   };
@@ -382,6 +418,20 @@ export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabPr
                       <Save className="w-4 h-4" />
                       <span>Save to Library</span>
                     </button>
+                    
+                    <button 
+                      onClick={saveToLibrary}
+                      className="w-full mt-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2 transition-colors"
+                    >
+                      <Save className="w-4 h-4" />
+                      <span>Save to My Library</span>
+                    </button>
+                    
+                    {showSaveSuccess && (
+                      <div className="mt-2 bg-green-100 border border-green-400 text-green-700 px-3 py-2 rounded text-sm">
+                        ✅ Experiment saved to library successfully!
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
