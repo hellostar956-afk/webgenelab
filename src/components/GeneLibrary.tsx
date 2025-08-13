@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, Share2, Download, Trash2, Eye, Plus, Beaker } from 'lucide-react';
+import { useAuth } from './Auth/AuthContext';
 
 interface SavedExperiment {
   id: string;
@@ -58,28 +59,35 @@ const sampleExperiments: SavedExperiment[] = [
 export default function GeneLibrary() {
   const [experiments, setExperiments] = useState<SavedExperiment[]>(sampleExperiments);
   const [selectedExperiment, setSelectedExperiment] = useState<SavedExperiment | null>(null);
+  const { currentUser } = useAuth();
 
-  // Load experiments from localStorage on component mount
+  // Load user-specific experiments from localStorage on component mount
   useEffect(() => {
-    const savedExperiments = JSON.parse(localStorage.getItem('savedExperiments') || '[]');
-    if (savedExperiments.length > 0) {
-      setExperiments([...sampleExperiments, ...savedExperiments]);
+    if (currentUser) {
+      const userKey = `savedExperiments_${currentUser.uid}`;
+      const savedExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
+      if (savedExperiments.length > 0) {
+        setExperiments([...sampleExperiments, ...savedExperiments]);
+      }
     }
-  }, []);
+  }, [currentUser]);
 
   const deleteExperiment = (experimentId: string) => {
-    // Remove from state
-    const updatedExperiments = experiments.filter(exp => exp.id !== experimentId);
-    setExperiments(updatedExperiments);
-    
-    // Update localStorage (only remove user-created experiments)
-    const savedExperiments = JSON.parse(localStorage.getItem('savedExperiments') || '[]');
-    const updatedSaved = savedExperiments.filter((exp: SavedExperiment) => exp.id !== experimentId);
-    localStorage.setItem('savedExperiments', JSON.stringify(updatedSaved));
-    
-    // Clear selection if deleted experiment was selected
-    if (selectedExperiment?.id === experimentId) {
-      setSelectedExperiment(null);
+    if (currentUser) {
+      // Remove from state
+      const updatedExperiments = experiments.filter(exp => exp.id !== experimentId);
+      setExperiments(updatedExperiments);
+      
+      // Update user-specific localStorage (only remove user-created experiments)
+      const userKey = `savedExperiments_${currentUser.uid}`;
+      const savedExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
+      const updatedSaved = savedExperiments.filter((exp: SavedExperiment) => exp.id !== experimentId);
+      localStorage.setItem(userKey, JSON.stringify(updatedSaved));
+      
+      // Clear selection if deleted experiment was selected
+      if (selectedExperiment?.id === experimentId) {
+        setSelectedExperiment(null);
+      }
     }
   };
 

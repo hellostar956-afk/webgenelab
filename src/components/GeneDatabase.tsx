@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Filter, MapPin, Dna, Info, Plus, ExternalLink, BookOpen } from 'lucide-react';
+import { geneDatabase, Gene } from '../data/geneDatabase';
 
 interface Gene {
   id: string;
@@ -427,34 +428,6 @@ const expandedGenes: Gene[] = [
     name: 'Cellulase',
     function: 'Enzyme complex for cellulose degradation',
     organism: 'Trichoderma reesei (Trichoderma Fungus)',
-    location: 'Chromosome VI',
-    type: 'Enzyme',
-    properties: ['Cellulose breakdown', 'Biomass conversion', 'Industrial enzyme'],
-    applications: ['Biofuel production', 'Paper industry', 'Waste treatment']
-  },
-  
-  // Marine Organisms
-  {
-    id: '39',
-    name: 'Hemocyanin',
-    function: 'Copper-based oxygen transport protein',
-    organism: 'Limulus polyphemus (Horseshoe Crab)',
-    location: 'Hemolymph',
-    type: 'Transport protein',
-    properties: ['Oxygen transport', 'Copper coordination', 'Blue blood pigment'],
-    applications: ['Medical research', 'Vaccine production', 'Biomedical testing']
-  },
-  {
-    id: '40',
-    name: 'Bioluminescent Protein',
-    function: 'Light-producing protein complex',
-    organism: 'Pyrodinium bahamense (Dinoflagellate)',
-    location: 'Scintillons',
-    type: 'Fluorescent protein',
-    properties: ['Bioluminescence', 'Calcium-dependent', 'Defense mechanism'],
-    applications: ['Marine biology research', 'Biotechnology', 'Environmental monitoring']
-  }
-];
 
 interface GeneDatabaseProps {
   selectedGenes: Gene[];
@@ -467,16 +440,17 @@ export default function GeneDatabase({ selectedGenes, setSelectedGenes, setActiv
   const [filterType, setFilterType] = useState('all');
   const [filterOrganism, setFilterOrganism] = useState('all');
 
-  const organisms = [...new Set(expandedGenes.map(gene => gene.organism))];
-  const geneTypes = [...new Set(expandedGenes.map(gene => gene.type))];
+  const organisms = [...new Set(geneDatabase.map(gene => `${gene.organism}${gene.commonName ? ` (${gene.commonName})` : ''}`))];
+  const geneTypes = [...new Set(geneDatabase.map(gene => gene.type))];
 
-  const filteredGenes = expandedGenes.filter(gene => {
+  const filteredGenes = geneDatabase.filter(gene => {
+    const displayName = `${gene.organism}${gene.commonName ? ` (${gene.commonName})` : ''}`;
     const matchesSearch = gene.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         gene.organism.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          gene.function.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          gene.properties.some(prop => prop.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesTypeFilter = filterType === 'all' || gene.type === filterType;
-    const matchesOrganismFilter = filterOrganism === 'all' || gene.organism === filterOrganism;
+    const matchesOrganismFilter = filterOrganism === 'all' || displayName === filterOrganism;
     return matchesSearch && matchesTypeFilter && matchesOrganismFilter;
   });
 
@@ -510,7 +484,7 @@ export default function GeneDatabase({ selectedGenes, setSelectedGenes, setActiv
           <div className="mt-4 flex items-center space-x-4 text-sm text-gray-500">
             <span className="flex items-center space-x-1">
               <BookOpen className="w-4 h-4" />
-              <span>{expandedGenes.length} genes catalogued</span>
+              <span>{geneDatabase.length} genes catalogued</span>
             </span>
             <span className="flex items-center space-x-1">
               <Dna className="w-4 h-4" />
@@ -618,7 +592,9 @@ export default function GeneDatabase({ selectedGenes, setSelectedGenes, setActiv
                     title={selectedGenes.find(g => g.id === gene.id) ? "Already selected" : "Add to experiment"}
                   >
                     <Plus className="w-4 h-4" />
-                  </button>
+                  <span className="text-gray-700 text-sm font-medium">
+                    {gene.organism}{gene.commonName ? ` (${gene.commonName})` : ''}
+                  </span>
                 </div>
 
                 <div className="space-y-3">
@@ -692,7 +668,7 @@ export default function GeneDatabase({ selectedGenes, setSelectedGenes, setActiv
           <h3 className="text-xl font-semibold mb-4">Database Statistics</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold">{expandedGenes.length}</div>
+              <div className="text-2xl font-bold">{geneDatabase.length}</div>
               <div className="text-blue-100 text-sm">Total Genes</div>
             </div>
             <div className="text-center">

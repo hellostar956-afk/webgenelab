@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dna, Search, FlaskConical, BookOpen, Share2 } from 'lucide-react';
+import { Dna, Search, FlaskConical, BookOpen, Share2, LogOut, User } from 'lucide-react';
+import { useAuth } from './Auth/AuthContext';
 
 interface HeaderProps {
   activeTab: string;
@@ -7,6 +8,8 @@ interface HeaderProps {
 }
 
 export default function Header({ activeTab, setActiveTab }: HeaderProps) {
+  const { currentUser, logout } = useAuth();
+  
   const tabs = [
     { id: 'home', label: 'Home', icon: Dna },
     { id: 'database', label: 'Gene Database', icon: Search },
@@ -14,6 +17,13 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
     { id: 'library', label: 'My Library', icon: BookOpen },
   ];
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Failed to log out', error);
+    }
+  };
   return (
     <header className="bg-gradient-to-r from-blue-900 via-blue-800 to-green-800 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,10 +55,19 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
             ))}
           </nav>
           
-          <button className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors">
-            <Share2 className="w-4 h-4" />
-            <span>Share</span>
-          </button>
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 text-blue-100">
+              <User className="w-4 h-4" />
+              <span className="text-sm">{currentUser?.email}</span>
+            </div>
+            <button 
+              onClick={handleLogout}
+              className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Logout</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>

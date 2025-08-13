@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
 import { FlaskConical, Scissors, RotateCcw, Play, Save, AlertTriangle, CheckCircle, Zap, Beaker, Dna as Dna2, ArrowRight } from 'lucide-react';
-
-interface Gene {
-  id: string;
-  name: string;
-  function: string;
-  organism: string;
-  location: string;
-  type: string;
-  properties: string[];
-}
+import { Gene } from '../data/geneDatabase';
+import { useAuth } from './Auth/AuthContext';
 
 interface VirtualLabProps {
   selectedGenes: Gene[];
@@ -34,6 +26,7 @@ export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabPr
   const [isSimulating, setIsSimulating] = useState(false);
   const [result, setResult] = useState<ExperimentResult | null>(null);
   const [showSaveSuccess, setShowSaveSuccess] = useState(false);
+  const { currentUser } = useAuth();
 
   const startEditing = () => {
     setEditedGenes([...selectedGenes]);
@@ -87,8 +80,9 @@ export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabPr
 
   const saveToLibrary = () => {
     if (result) {
-      // Get existing experiments from localStorage
-      const existingExperiments = JSON.parse(localStorage.getItem('savedExperiments') || '[]');
+      // Get user-specific experiments from localStorage
+      const userKey = `savedExperiments_${currentUser?.uid}`;
+      const existingExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
       
       // Create new experiment object
       const newExperiment = {
@@ -106,8 +100,8 @@ export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabPr
       // Add to experiments array
       existingExperiments.push(newExperiment);
       
-      // Save back to localStorage
-      localStorage.setItem('savedExperiments', JSON.stringify(existingExperiments));
+      // Save back to user-specific localStorage
+      localStorage.setItem(userKey, JSON.stringify(existingExperiments));
       
       // Show success message
       setShowSaveSuccess(true);
@@ -213,7 +207,7 @@ export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabPr
                     <p className="text-sm text-gray-600 mt-1">{gene.function}</p>
                     <div className="mt-2">
                       <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
-                        {gene.organism}
+                        {gene.organism}{gene.commonName ? ` (${gene.commonName})` : ''}
                       </span>
                     </div>
                     <div className="mt-2 flex flex-wrap gap-1">
@@ -286,7 +280,9 @@ export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabPr
                           </div>
                           <span className="text-sm text-gray-500">#{index + 1}</span>
                         </div>
-                        <p className="text-xs text-gray-600 mt-1">{gene.organism}</p>
+                        <p className="text-xs text-gray-600 mt-1">
+                          {gene.organism}{gene.commonName ? ` (${gene.commonName})` : ''}
+                        </p>
                         <div className="mt-2 flex flex-wrap gap-1">
                           {gene.properties.slice(0, 2).map((prop, propIndex) => (
                             <span key={propIndex} className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">

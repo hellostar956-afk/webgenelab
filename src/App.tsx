@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
+import { AuthProvider, useAuth } from './components/Auth/AuthContext';
+import AuthGate from './components/Auth/AuthGate';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
 import GeneDatabase from './components/GeneDatabase';
 import VirtualLab from './components/VirtualLab';
 import GeneLibrary from './components/GeneLibrary';
+import { Gene } from './data/geneDatabase';
 
-interface Gene {
-  id: string;
-  name: string;
-  function: string;
-  organism: string;
-  location: string;
-  type: string;
-  properties: string[];
-}
-
-function App() {
+function AppContent() {
   const [activeTab, setActiveTab] = useState('home');
   const [selectedGenes, setSelectedGenes] = useState<Gene[]>([]);
+  const { currentUser } = useAuth();
 
   const renderActiveTab = () => {
     switch (activeTab) {
@@ -30,10 +24,13 @@ function App() {
       case 'library':
         return <GeneLibrary />;
       default:
-        return <HomePage />;
+        return <HomePage setActiveTab={setActiveTab} />;
     }
   };
 
+  if (!currentUser) {
+    return null; // This will be handled by AuthGate
+  }
   return (
     <div className="min-h-screen bg-gray-50">
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -42,4 +39,13 @@ function App() {
   );
 }
 
+function App() {
+  return (
+    <AuthProvider>
+      <AuthGate>
+        <AppContent />
+      </AuthGate>
+    </AuthProvider>
+  );
+}
 export default App;
