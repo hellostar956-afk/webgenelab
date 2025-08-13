@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Share2, Download, Trash2, Eye, Plus, Beaker } from 'lucide-react';
-import { useAuth } from './Auth/AuthContext';
+import { BookOpen, Share2, Download, Trash2, Eye, Plus, Beaker, Copy, Check } from 'lucide-react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 interface SavedExperiment {
   id: string;
@@ -59,35 +60,133 @@ const sampleExperiments: SavedExperiment[] = [
 export default function GeneLibrary() {
   const [experiments, setExperiments] = useState<SavedExperiment[]>(sampleExperiments);
   const [selectedExperiment, setSelectedExperiment] = useState<SavedExperiment | null>(null);
-  const { currentUser } = useAuth();
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  // Load user-specific experiments from localStorage on component mount
+  // Load experiments from localStorage on component mount
   useEffect(() => {
-    if (currentUser) {
-      const userKey = `savedExperiments_${currentUser.uid}`;
-      const savedExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
-      if (savedExperiments.length > 0) {
-        setExperiments([...sampleExperiments, ...savedExperiments]);
-      }
+    const savedExperiments = JSON.parse(localStorage.getItem('savedExperiments') || '[]');
+    if (savedExperiments.length > 0) {
+      setExperiments([...sampleExperiments, ...savedExperiments]);
     }
-  }, [currentUser]);
+  }, []);
+
+  const shareExperiment = async (experiment: SavedExperiment) => {
+    const shareData = {
+      title: `Gene Experiment: ${experiment.name}`,
+      text: `Check out this genetic engineering experiment: ${experiment.name} with ${experiment.genes.join(', ')} genes. Viability: ${experiment.viability}%`,
+      url: window.location.href
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.log('Error sharing:', err);
+        copyToClipboard(experiment);
+      }
+    } else {
+      copyToClipboard(experiment);
+    }
+  };
+
+  const copyToClipboard = (experiment: SavedExperiment) => {
+    const shareText = `Gene Experiment: ${experiment.name}\nOrganism: ${experiment.organism}\nGenes: ${experiment.genes.join(', ')}\nViability: ${experiment.viability}%\nProperties: ${experiment.properties.join(', ')}`;
+    
+    navigator.clipboard.writeText(shareText).then(() => {
+      setCopiedId(experiment.id);
+      setTimeout(() => setCopiedId(null), 2000);
+    });
+  };
+
+  const downloadExperiment = async (experiment: SavedExperiment) => {
+    // Create a temporary div with experiment details
+    const tempDiv = document.createElement('div');
+    tempDiv.style.padding = '20px';
+    tempDiv.style.backgroundColor = 'white';
+    tempDiv.style.fontFamily = 'Arial, sans-serif';
+    tempDiv.innerHTML = `
+      <h1 style="color: #1f2937; margin-bottom: 20px;">${experiment.name}</h1>
+      <div style="margin-bottom: 15px;">
+        <strong>Organism:</strong> ${experiment.organism}
+      </div>
+      <div style="margin-bottom: 15px;">
+        <strong>Viability:</strong> ${experiment.viability}%
+      </div>
+      <div style="margin-bottom: 15px;">
+        <strong>Type:</strong> ${experiment.type}
+      </div>
+      <div style="margin-bottom: 15px;">
+        <strong>Date Created:</strong> ${experiment.dateCreated}
+      </div>
+      <div style="margin-bottom: 15px;">
+        <strong>Genes Used:</strong>
+        <ul style="margin: 5px 0; padding-left: 20px;">
+          ${experiment.genes.map(gene => `<li>${gene}</li>`).join('')}
+        </ul>
+      </div>
+      <div style="margin-bottom: 15px;">
+        <strong>Properties:</strong>
+        <ul style="margin: 5px 0; padding-left: 20px;">
+          ${experiment.properties.map(prop => `<li>${prop}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+    
+    document.body.appendChild(tempDiv);
+    
+    try {
+      const canvas = await html2canvas(tempDiv);
+      const imgData = canvas.toDataURL('image/png');
+      
+      // Create PDF
+      const pdf = new jsPDF();
+      const imgWidth = 190;
+      const pageHeight = pdf.internal.pageSize.height;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      
+      let position = 10;
+      
+      pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+      
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      
+      pdf.save(`${experiment.name.replace(/\s+/g, '_')}_experiment.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      // Fallback: download as JSON
+      const dataStr = JSON.stringify(experiment, null, 2);
+      const dataBlob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${experiment.name.replace(/\s+/g, '_')}_experiment.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+    } finally {
+      document.body.removeChild(tempDiv);
+    }
+  };
 
   const deleteExperiment = (experimentId: string) => {
-    if (currentUser) {
-      // Remove from state
-      const updatedExperiments = experiments.filter(exp => exp.id !== experimentId);
-      setExperiments(updatedExperiments);
-      
-      // Update user-specific localStorage (only remove user-created experiments)
-      const userKey = `savedExperiments_${currentUser.uid}`;
-      const savedExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
-      const updatedSaved = savedExperiments.filter((exp: SavedExperiment) => exp.id !== experimentId);
-      localStorage.setItem(userKey, JSON.stringify(updatedSaved));
-      
-      // Clear selection if deleted experiment was selected
-      if (selectedExperiment?.id === experimentId) {
-        setSelectedExperiment(null);
-      }
+    // Remove from state
+    const updatedExperiments = experiments.filter(exp => exp.id !== experimentId);
+    setExperiments(updatedExperiments);
+    
+    // Update localStorage (only remove user-created experiments)
+    const savedExperiments = JSON.parse(localStorage.getItem('savedExperiments') || '[]');
+    const updatedSaved = savedExperiments.filter((exp: SavedExperiment) => exp.id !== experimentId);
+    localStorage.setItem('savedExperiments', JSON.stringify(updatedSaved));
+    
+    // Clear selection if deleted experiment was selected
+    if (selectedExperiment?.id === experimentId) {
+      setSelectedExperiment(null);
     }
   };
 
@@ -176,18 +275,28 @@ export default function GeneLibrary() {
                         <button 
                           onClick={() => setSelectedExperiment(experiment)}
                           className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors"
+                          title="View Details"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-lg transition-colors">
-                          <Share2 className="w-4 h-4" />
+                        <button 
+                          onClick={() => shareExperiment(experiment)}
+                          className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-lg transition-colors relative"
+                          title="Share Experiment"
+                        >
+                          {copiedId === experiment.id ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
                         </button>
-                        <button className="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-lg transition-colors">
+                        <button 
+                          onClick={() => downloadExperiment(experiment)}
+                          className="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-lg transition-colors"
+                          title="Download as PDF"
+                        >
                           <Download className="w-4 h-4" />
                         </button>
                         <button 
                           onClick={() => deleteExperiment(experiment.id)}
                           className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition-colors"
+                          title="Delete Experiment"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
