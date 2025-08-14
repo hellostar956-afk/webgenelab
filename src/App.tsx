@@ -1,8 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
-import GeneDatabase from './GeneDatabase';
-import GeneLibrary from './GeneLibrary';
+import GeneDatabase from './components/GeneDatabase';
+import GeneLibrary from './components/GeneLibrary';
 import DNAVisualization from './DNAVisualization';
+import VirtualLab from './components/VirtualLab';
+import HomePage from './components/HomePage';
+import Header from './components/Header';
+import { AuthProvider } from './components/Auth/AuthContext';
+import AuthGate from './components/Auth/AuthGate';
 import { Database, BookOpen, Dna, X } from 'lucide-react';
 
 interface Gene {
