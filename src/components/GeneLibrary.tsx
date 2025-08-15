@@ -64,7 +64,8 @@ export default function GeneLibrary() {
 
   // Load experiments from localStorage on component mount
   useEffect(() => {
-    const savedExperiments = JSON.parse(localStorage.getItem('savedExperiments') || '[]');
+    const userKey = `savedExperiments_${localStorage.getItem('currentUserId') || 'anonymous'}`;
+    const savedExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
     if (savedExperiments.length > 0) {
       setExperiments([...sampleExperiments, ...savedExperiments]);
     }
@@ -180,9 +181,10 @@ export default function GeneLibrary() {
     setExperiments(updatedExperiments);
     
     // Update localStorage (only remove user-created experiments)
-    const savedExperiments = JSON.parse(localStorage.getItem('savedExperiments') || '[]');
+    const userKey = `savedExperiments_${localStorage.getItem('currentUserId') || 'anonymous'}`;
+    const savedExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
     const updatedSaved = savedExperiments.filter((exp: SavedExperiment) => exp.id !== experimentId);
-    localStorage.setItem('savedExperiments', JSON.stringify(updatedSaved));
+    localStorage.setItem(userKey, JSON.stringify(updatedSaved));
     
     // Clear selection if deleted experiment was selected
     if (selectedExperiment?.id === experimentId) {

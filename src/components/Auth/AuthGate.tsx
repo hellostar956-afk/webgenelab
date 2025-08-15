@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Dna, Shield, Users, Globe, Microscope, FlaskConical } from 'lucide-react';
 import Login from './Login';
 import Signup from './Signup';
+import { useAuth } from './AuthContext';
 
 interface AuthGateProps {
   children: React.ReactNode;
@@ -10,6 +11,22 @@ interface AuthGateProps {
 export default function AuthGate({ children }: AuthGateProps) {
   const [showAuth, setShowAuth] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+  const { currentUser, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-green-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
+          <p className="text-white text-lg">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (currentUser) {
+    return <>{children}</>;
+  }
 
   if (!showAuth) {
     return (

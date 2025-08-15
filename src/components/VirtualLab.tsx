@@ -81,7 +81,7 @@ export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabPr
   const saveToLibrary = () => {
     if (result) {
       // Get user-specific experiments from localStorage
-      const userKey = `savedExperiments_${currentUser?.uid}`;
+      const userKey = `savedExperiments_${currentUser?.uid || 'anonymous'}`;
       const existingExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
       
       // Create new experiment object

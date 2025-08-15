@@ -8,6 +8,7 @@ import HomePage from './components/HomePage';
 import Header from './components/Header';
 import { AuthProvider } from './components/Auth/AuthContext';
 import AuthGate from './components/Auth/AuthGate';
+import { useAuth } from './components/Auth/AuthContext';
 import { Database, BookOpen, Dna, X } from 'lucide-react';
 
 interface Gene {
@@ -23,57 +24,31 @@ interface Gene {
   applications?: string[];
 }
 
-function App() {
-  const [activeTab, setActiveTab] = useState('database');
+function AppContent() {
+  const [activeTab, setActiveTab] = useState('home');
   const [selectedGenes, setSelectedGenes] = useState<Gene[]>([]);
   const [showDNA, setShowDNA] = useState(false);
+  const { currentUser } = useAuth();
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <Dna className="w-8 h-8 text-blue-600" />
-              <h1 className="text-xl font-bold text-gray-900">GeneForge Laboratory</h1>
-            </div>
-            <div className="flex space-x-1">
-              <button
-                onClick={() => setActiveTab('database')}
-                className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors ${
-                  activeTab === 'database' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'text-gray-600 hover:bg-gray-100'
-                }`}
-              >
-                <Database className="w-4 h-4" />
-                <span>Gene Database</span>
-              </button>
-              <button
-                onClick={() => setActiveTab('library')}
-                className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors ${
-                  activeTab === 'library' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'text-gray-600 hover:bg-gray-100'
-                }`}
-              >
-                <BookOpen className="w-4 h-4" />
-                <span>My Library</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Main Content */}
       <main>
+        {activeTab === 'home' && <HomePage setActiveTab={setActiveTab} />}
         {activeTab === 'database' && (
           <GeneDatabase 
             selectedGenes={selectedGenes} 
             setSelectedGenes={setSelectedGenes}
             setActiveTab={setActiveTab}
             setShowDNA={setShowDNA}
+          />
+        )}
+        {activeTab === 'lab' && (
+          <VirtualLab 
+            selectedGenes={selectedGenes}
+            setActiveTab={setActiveTab}
           />
         )}
         {activeTab === 'library' && <GeneLibrary />}
@@ -99,6 +74,16 @@ function App() {
         </div>
       )}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AuthGate>
+        <AppContent />
+      </AuthGate>
+    </AuthProvider>
   );
 }
 
