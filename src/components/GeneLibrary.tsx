@@ -64,10 +64,25 @@ export default function GeneLibrary() {
 
   // Load experiments from localStorage on component mount
   useEffect(() => {
-    const userKey = `savedExperiments_${localStorage.getItem('currentUserId') || 'anonymous'}`;
-    const savedExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
-    if (savedExperiments.length > 0) {
-      setExperiments([...sampleExperiments, ...savedExperiments]);
+    try {
+      // Get current user ID from auth context or localStorage
+      const userId = localStorage.getItem('currentUserId') || 'anonymous';
+      const userKey = `savedExperiments_${userId}`;
+      const savedExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
+      
+      if (savedExperiments.length > 0) {
+        // Combine sample experiments with user experiments, avoiding duplicates
+        const combinedExperiments = [...sampleExperiments];
+        savedExperiments.forEach((saved: SavedExperiment) => {
+          if (!combinedExperiments.find(exp => exp.id === saved.id)) {
+            combinedExperiments.push(saved);
+          }
+        });
+        setExperiments(combinedExperiments);
+      }
+    } catch (error) {
+      console.error('Failed to load experiments:', error);
+      setExperiments(sampleExperiments);
     }
   }, []);
 

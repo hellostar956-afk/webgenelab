@@ -80,32 +80,37 @@ export default function VirtualLab({ selectedGenes, setActiveTab }: VirtualLabPr
 
   const saveToLibrary = () => {
     if (result) {
-      // Get user-specific experiments from localStorage
-      const userKey = `savedExperiments_${currentUser?.uid || 'anonymous'}`;
-      const existingExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
-      
-      // Create new experiment object
-      const newExperiment = {
-        id: result.id,
-        name: result.newOrganism,
-        organism: result.newOrganism,
-        genes: result.genes,
-        viability: result.viability,
-        dateCreated: result.dateCreated,
-        properties: result.properties,
-        type: result.success ? 'success' : (result.viability > 30 ? 'partial' : 'failed'),
-        risks: result.risks
-      };
-      
-      // Add to experiments array
-      existingExperiments.push(newExperiment);
-      
-      // Save back to user-specific localStorage
-      localStorage.setItem(userKey, JSON.stringify(existingExperiments));
-      
-      // Show success message
-      setShowSaveSuccess(true);
-      setTimeout(() => setShowSaveSuccess(false), 3000);
+      try {
+        // Get user-specific experiments from localStorage
+        const userKey = `savedExperiments_${currentUser?.uid || 'anonymous'}`;
+        const existingExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
+        
+        // Create new experiment object
+        const newExperiment = {
+          id: result.id,
+          name: result.newOrganism,
+          organism: result.newOrganism,
+          genes: result.genes,
+          viability: result.viability,
+          dateCreated: result.dateCreated,
+          properties: result.properties,
+          type: result.success ? 'success' : (result.viability > 30 ? 'partial' : 'failed'),
+          risks: result.risks
+        };
+        
+        // Add to experiments array
+        existingExperiments.push(newExperiment);
+        
+        // Save back to user-specific localStorage
+        localStorage.setItem(userKey, JSON.stringify(existingExperiments));
+        
+        // Show success message
+        setShowSaveSuccess(true);
+        setTimeout(() => setShowSaveSuccess(false), 3000);
+      } catch (error) {
+        console.error('Failed to save experiment:', error);
+        alert('Failed to save experiment. Please try again.');
+      }
     }
   };
   const handleDragStart = (gene: Gene) => {

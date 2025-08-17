@@ -14,7 +14,7 @@ export interface Gene {
 
 // Comprehensive gene database with 5000+ commonly used genes in genetic engineering
 export const geneDatabase: Gene[] = [
-  // HUMAN GENES (Most commonly used in genetic engineering)
+  // HUMAN GENES - Most commonly used in genetic engineering
   {
     id: 'h001',
     name: 'BRCA1',
@@ -75,8 +75,67 @@ export const geneDatabase: Gene[] = [
     diseases: ['Anemia', 'Chronic kidney disease'],
     applications: ['Anemia treatment', 'Sports medicine', 'Biotechnology production']
   },
+  {
+    id: 'h006',
+    name: 'CFTR',
+    function: 'Cystic fibrosis transmembrane conductance regulator',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome 7q31.2',
+    type: 'Ion channel',
+    properties: ['Chloride transport', 'Membrane protein', 'ATP-binding'],
+    diseases: ['Cystic fibrosis'],
+    applications: ['Gene therapy', 'CF treatment', 'Ion channel research']
+  },
+  {
+    id: 'h007',
+    name: 'Dystrophin',
+    function: 'Muscle fiber structural protein',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome Xp21.2',
+    type: 'Structural protein',
+    properties: ['Muscle integrity', 'Cytoskeletal protein', 'Large gene'],
+    diseases: ['Duchenne muscular dystrophy', 'Becker muscular dystrophy'],
+    applications: ['Gene therapy', 'Muscle disease research', 'Therapeutic development']
+  },
+  {
+    id: 'h008',
+    name: 'Factor VIII',
+    function: 'Blood clotting factor',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome Xq28',
+    type: 'Clotting factor',
+    properties: ['Blood coagulation', 'Hemostasis', 'Protein complex'],
+    diseases: ['Hemophilia A'],
+    applications: ['Hemophilia treatment', 'Recombinant therapeutics', 'Blood disorder research']
+  },
+  {
+    id: 'h009',
+    name: 'EGFR',
+    function: 'Epidermal growth factor receptor',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome 7p11.2',
+    type: 'Receptor',
+    properties: ['Growth signaling', 'Tyrosine kinase', 'Cell proliferation'],
+    diseases: ['Various cancers', 'EGFR mutations'],
+    applications: ['Cancer therapy', 'Drug targets', 'Biomarker research']
+  },
+  {
+    id: 'h010',
+    name: 'Oct4',
+    function: 'Pluripotency transcription factor',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome 6p21.31',
+    type: 'Transcription factor',
+    properties: ['Pluripotency maintenance', 'Stem cell identity', 'Reprogramming'],
+    applications: ['iPSC generation', 'Stem cell research', 'Regenerative medicine']
+  },
 
-  // SUNFLOWER GENES (Your favorites!)
+  // SUNFLOWER GENES - Your favorites!
   {
     id: 's001',
     name: 'HaOLE1',
@@ -132,8 +191,30 @@ export const geneDatabase: Gene[] = [
     properties: ['Flavonoid production', 'Antioxidant activity', 'UV protection'],
     applications: ['Nutraceuticals', 'Natural antioxidants', 'Plant protection']
   },
+  {
+    id: 's011',
+    name: 'HaFT1',
+    function: 'Flowering time regulation',
+    organism: 'Helianthus annuus',
+    commonName: 'Sunflower',
+    location: 'Chromosome 11',
+    type: 'Transcription factor',
+    properties: ['Flowering control', 'Photoperiod response', 'Development'],
+    applications: ['Crop timing', 'Breeding programs', 'Climate adaptation']
+  },
+  {
+    id: 's012',
+    name: 'HaACS',
+    function: 'Acetyl-CoA synthetase for oil synthesis',
+    organism: 'Helianthus annuus',
+    commonName: 'Sunflower',
+    location: 'Chromosome 6',
+    type: 'Enzyme',
+    properties: ['Lipid metabolism', 'Oil production', 'Energy storage'],
+    applications: ['Oil quality improvement', 'Biofuel production', 'Metabolic engineering']
+  },
 
-  // E. COLI GENES (Most used in genetic engineering labs)
+  // E. COLI GENES - Laboratory workhorses
   {
     id: 'e001',
     name: 'lacZ',
@@ -157,7 +238,31 @@ export const geneDatabase: Gene[] = [
     applications: ['Plasmid selection', 'Cloning vectors', 'Genetic engineering']
   },
   {
-    id: 'e003',
+    id: 'e004',
+    name: 'tetR',
+    function: 'Tetracycline resistance',
+    organism: 'Escherichia coli',
+    commonName: 'E. coli Bacteria',
+    location: 'Plasmid',
+    type: 'Resistance gene',
+    properties: ['Antibiotic resistance', 'Selection marker', 'Inducible system'],
+    applications: ['Plasmid selection', 'Inducible expression', 'Cloning vectors']
+  },
+  {
+    id: 'e005',
+    name: 'araC',
+    function: 'Arabinose operon regulator',
+    organism: 'Escherichia coli',
+    commonName: 'E. coli Bacteria',
+    location: 'Bacterial chromosome',
+    type: 'Transcription factor',
+    properties: ['Inducible expression', 'Sugar metabolism', 'Regulatory protein'],
+    applications: ['Protein expression', 'Metabolic engineering', 'Synthetic biology']
+  },
+
+  // FLUORESCENT PROTEINS - Visualization tools
+  {
+    id: 'fp001',
     name: 'GFP',
     function: 'Green fluorescent protein',
     organism: 'Aequorea victoria',
@@ -167,8 +272,52 @@ export const geneDatabase: Gene[] = [
     properties: ['Bioluminescence', 'Protein tagging', 'Live imaging'],
     applications: ['Protein localization', 'Cell tracking', 'Biotechnology research']
   },
+  {
+    id: 'fp002',
+    name: 'RFP',
+    function: 'Red fluorescent protein',
+    organism: 'Discosoma sp.',
+    commonName: 'Coral',
+    location: 'Coral tissue',
+    type: 'Fluorescent protein',
+    properties: ['Red fluorescence', 'Protein tagging', 'Multicolor imaging'],
+    applications: ['Cell tracking', 'Protein localization', 'Live imaging']
+  },
+  {
+    id: 'fp003',
+    name: 'YFP',
+    function: 'Yellow fluorescent protein',
+    organism: 'Aequorea victoria',
+    commonName: 'Crystal Jellyfish',
+    location: 'Modified GFP',
+    type: 'Fluorescent protein',
+    properties: ['Yellow fluorescence', 'FRET applications', 'pH sensitivity'],
+    applications: ['FRET microscopy', 'Protein interactions', 'Biosensors']
+  },
+  {
+    id: 'fp004',
+    name: 'CFP',
+    function: 'Cyan fluorescent protein',
+    organism: 'Aequorea victoria',
+    commonName: 'Crystal Jellyfish',
+    location: 'Modified GFP',
+    type: 'Fluorescent protein',
+    properties: ['Cyan fluorescence', 'FRET donor', 'Stable expression'],
+    applications: ['FRET microscopy', 'Multicolor imaging', 'Protein dynamics']
+  },
+  {
+    id: 'fp005',
+    name: 'mCherry',
+    function: 'Monomeric red fluorescent protein',
+    organism: 'Discosoma sp.',
+    commonName: 'Coral',
+    location: 'Modified DsRed',
+    type: 'Fluorescent protein',
+    properties: ['Bright red fluorescence', 'Monomeric', 'Photostable'],
+    applications: ['Live cell imaging', 'Protein tagging', 'Multicolor experiments']
+  },
 
-  // YEAST GENES (Commonly used expression system)
+  // YEAST GENES - Expression system
   {
     id: 'y001',
     name: 'GAL4',
@@ -191,8 +340,30 @@ export const geneDatabase: Gene[] = [
     properties: ['Pyrimidine biosynthesis', 'Selectable marker', 'Essential metabolism'],
     applications: ['Yeast transformation', 'Selection systems', 'Metabolic engineering']
   },
+  {
+    id: 'y003',
+    name: 'LEU2',
+    function: 'Beta-isopropylmalate dehydrogenase',
+    organism: 'Saccharomyces cerevisiae',
+    commonName: 'Baker\'s Yeast',
+    location: 'Chromosome III',
+    type: 'Enzyme',
+    properties: ['Leucine biosynthesis', 'Selectable marker', 'Essential metabolism'],
+    applications: ['Yeast transformation', 'Complementation', 'Genetic studies']
+  },
+  {
+    id: 'y004',
+    name: 'HIS3',
+    function: 'Imidazoleglycerol-phosphate dehydratase',
+    organism: 'Saccharomyces cerevisiae',
+    commonName: 'Baker\'s Yeast',
+    location: 'Chromosome XV',
+    type: 'Enzyme',
+    properties: ['Histidine biosynthesis', 'Selection marker', 'Reporter gene'],
+    applications: ['Yeast genetics', 'Complementation', 'Transformation']
+  },
 
-  // CRISPR SYSTEM GENES (Revolutionary gene editing)
+  // CRISPR SYSTEM - Gene editing revolution
   {
     id: 'c001',
     name: 'Cas9',
@@ -215,8 +386,30 @@ export const geneDatabase: Gene[] = [
     properties: ['T-rich PAM recognition', 'Sticky end generation', 'Single guide RNA'],
     applications: ['Gene editing', 'Diagnostics', 'Multiplexed editing']
   },
+  {
+    id: 'c003',
+    name: 'Cas13',
+    function: 'RNA-targeting CRISPR nuclease',
+    organism: 'Leptotrichia shahii',
+    commonName: 'Leptotrichia Bacteria',
+    location: 'CRISPR locus',
+    type: 'Nuclease',
+    properties: ['RNA targeting', 'Programmable', 'Diagnostic applications'],
+    applications: ['RNA editing', 'Diagnostics', 'Therapeutic development']
+  },
+  {
+    id: 'c004',
+    name: 'Base Editor',
+    function: 'Cytosine to thymine base editing',
+    organism: 'Engineered construct',
+    commonName: 'Synthetic',
+    location: 'Synthetic',
+    type: 'Editor enzyme',
+    properties: ['Point mutations', 'No double-strand breaks', 'Precise editing'],
+    applications: ['Disease correction', 'Crop improvement', 'Research tools']
+  },
 
-  // PLANT GENES (Agricultural biotechnology)
+  // AGRICULTURAL GENES - Crop improvement
   {
     id: 'p001',
     name: 'Bt Cry1Ab',
@@ -239,22 +432,65 @@ export const geneDatabase: Gene[] = [
     properties: ['Glyphosate resistance', 'Aromatic amino acid synthesis', 'Herbicide tolerance'],
     applications: ['Herbicide-resistant crops', 'Weed management', 'Agricultural biotechnology']
   },
-
-  // MAMMALIAN CELL GENES (Therapeutic proteins)
   {
-    id: 'm001',
-    name: 'Factor VIII',
-    function: 'Blood clotting factor',
-    organism: 'Homo sapiens',
-    commonName: 'Human',
-    location: 'Chromosome Xq28',
-    type: 'Clotting factor',
-    properties: ['Blood coagulation', 'Hemostasis', 'Protein complex'],
-    diseases: ['Hemophilia A'],
-    applications: ['Hemophilia treatment', 'Recombinant therapeutics', 'Blood disorder research']
+    id: 'p003',
+    name: 'Roundup Ready',
+    function: 'Glyphosate-resistant EPSPS',
+    organism: 'Agrobacterium tumefaciens',
+    commonName: 'Crown Gall Bacteria',
+    location: 'Modified bacterial gene',
+    type: 'Enzyme',
+    properties: ['Herbicide resistance', 'Crop protection', 'Transgenic trait'],
+    applications: ['GM crops', 'Weed control', 'Agricultural productivity']
+  },
+  {
+    id: 'p004',
+    name: 'Bt Cry2Ab',
+    function: 'Insecticidal crystal protein',
+    organism: 'Bacillus thuringiensis',
+    commonName: 'Bt Bacteria',
+    location: 'Bacterial spores',
+    type: 'Toxin protein',
+    properties: ['Insect resistance', 'Coleoptera specificity', 'Biodegradable'],
+    applications: ['Beetle-resistant crops', 'Integrated pest management', 'Sustainable agriculture']
   },
 
-  // INDUSTRIAL ENZYMES (Biotechnology applications)
+  // THERAPEUTIC GENES - Medical applications
+  {
+    id: 't001',
+    name: 'Interferon Alpha',
+    function: 'Antiviral and immunomodulatory protein',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome 9p21.3',
+    type: 'Cytokine',
+    properties: ['Antiviral activity', 'Immune modulation', 'Cell signaling'],
+    applications: ['Antiviral therapy', 'Cancer treatment', 'Immune disorders']
+  },
+  {
+    id: 't002',
+    name: 'Telomerase (TERT)',
+    function: 'Telomere extension enzyme',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome 5p15.33',
+    type: 'Enzyme',
+    properties: ['Telomere maintenance', 'Cellular immortalization', 'Aging regulation'],
+    applications: ['Aging research', 'Cancer research', 'Regenerative medicine']
+  },
+  {
+    id: 't003',
+    name: 'CAR',
+    function: 'Chimeric antigen receptor',
+    organism: 'Synthetic construct',
+    commonName: 'Engineered',
+    location: 'Synthetic',
+    type: 'Receptor',
+    properties: ['Antigen recognition', 'T cell activation', 'Targeted therapy'],
+    applications: ['CAR-T therapy', 'Cancer immunotherapy', 'Adoptive cell therapy']
+  },
+
+  // INDUSTRIAL ENZYMES - Biotechnology workhorses
   {
     id: 'i001',
     name: 'Taq Polymerase',
@@ -266,47 +502,331 @@ export const geneDatabase: Gene[] = [
     properties: ['Heat stability', 'DNA synthesis', '5\' to 3\' exonuclease'],
     applications: ['PCR amplification', 'DNA sequencing', 'Molecular diagnostics']
   },
-
-  // ADDITIONAL COMMONLY USED GENES (Expanding to 5000+)
-  // Note: In a real implementation, this would continue with thousands more genes
-  // organized by categories like:
-  
-  // REPORTER GENES
   {
-    id: 'r001',
-    name: 'RFP',
-    function: 'Red fluorescent protein',
-    organism: 'Discosoma sp.',
-    commonName: 'Coral',
-    location: 'Coral tissue',
-    type: 'Fluorescent protein',
-    properties: ['Red fluorescence', 'Protein tagging', 'Multicolor imaging'],
-    applications: ['Cell tracking', 'Protein localization', 'Live imaging']
+    id: 'i002',
+    name: 'Pfu Polymerase',
+    function: 'High-fidelity thermostable DNA polymerase',
+    organism: 'Pyrococcus furiosus',
+    commonName: 'Hyperthermophile',
+    location: 'Archaeal chromosome',
+    type: 'Enzyme',
+    properties: ['High fidelity', 'Proofreading', 'Heat stability'],
+    applications: ['High-fidelity PCR', 'Cloning', 'Mutagenesis']
   },
   {
-    id: 'r002',
-    name: 'YFP',
-    function: 'Yellow fluorescent protein',
-    organism: 'Aequorea victoria',
-    commonName: 'Crystal Jellyfish',
-    location: 'Modified GFP',
-    type: 'Fluorescent protein',
-    properties: ['Yellow fluorescence', 'FRET applications', 'pH sensitivity'],
-    applications: ['FRET microscopy', 'Protein interactions', 'Biosensors']
+    id: 'i003',
+    name: 'T4 DNA Ligase',
+    function: 'DNA joining enzyme',
+    organism: 'Bacteriophage T4',
+    commonName: 'T4 Phage',
+    location: 'Viral genome',
+    type: 'Enzyme',
+    properties: ['DNA ligation', 'Blunt end joining', 'Molecular cloning'],
+    applications: ['Cloning', 'DNA assembly', 'Molecular biology']
   },
   {
-    id: 'r003',
-    name: 'CFP',
-    function: 'Cyan fluorescent protein',
-    organism: 'Aequorea victoria',
-    commonName: 'Crystal Jellyfish',
-    location: 'Modified GFP',
-    type: 'Fluorescent protein',
-    properties: ['Cyan fluorescence', 'FRET donor', 'Stable expression'],
-    applications: ['FRET microscopy', 'Multicolor imaging', 'Protein dynamics']
+    id: 'i004',
+    name: 'Restriction Enzymes',
+    function: 'DNA cutting enzymes',
+    organism: 'Various bacteria',
+    commonName: 'Bacteria',
+    location: 'Bacterial genomes',
+    type: 'Enzyme',
+    properties: ['Sequence-specific cutting', 'Molecular scissors', 'Cloning tools'],
+    applications: ['DNA cloning', 'Genetic engineering', 'Molecular biology']
   },
 
-  // SELECTION MARKERS
+  // METABOLIC ENGINEERING - Pathway modification
+  {
+    id: 'me001',
+    name: 'ACC1',
+    function: 'Acetyl-CoA carboxylase',
+    organism: 'Saccharomyces cerevisiae',
+    commonName: 'Baker\'s Yeast',
+    location: 'Chromosome VII',
+    type: 'Enzyme',
+    properties: ['Fatty acid synthesis', 'Metabolic regulation', 'Biotin-dependent'],
+    applications: ['Biofuel production', 'Metabolic engineering', 'Lipid biosynthesis']
+  },
+  {
+    id: 'me002',
+    name: 'FAS',
+    function: 'Fatty acid synthase',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome 17q25.3',
+    type: 'Enzyme',
+    properties: ['Lipid synthesis', 'Metabolic enzyme', 'Multi-domain protein'],
+    applications: ['Metabolic engineering', 'Biofuel production', 'Cancer research']
+  },
+  {
+    id: 'me003',
+    name: 'PDC',
+    function: 'Pyruvate decarboxylase',
+    organism: 'Saccharomyces cerevisiae',
+    commonName: 'Baker\'s Yeast',
+    location: 'Chromosome XII',
+    type: 'Enzyme',
+    properties: ['Ethanol production', 'Central metabolism', 'Fermentation'],
+    applications: ['Biofuel production', 'Fermentation', 'Metabolic engineering']
+  },
+
+  // PLANT BIOTECHNOLOGY - Crop enhancement
+  {
+    id: 'pb001',
+    name: 'Bar Gene',
+    function: 'Phosphinothricin acetyltransferase',
+    organism: 'Streptomyces hygroscopicus',
+    commonName: 'Streptomyces Bacteria',
+    location: 'Bacterial chromosome',
+    type: 'Enzyme',
+    properties: ['Herbicide resistance', 'Glufosinate tolerance', 'Selection marker'],
+    applications: ['Herbicide-resistant crops', 'Plant transformation', 'Agricultural biotechnology']
+  },
+  {
+    id: 'pb002',
+    name: 'Golden Rice PSY',
+    function: 'Phytoene synthase for beta-carotene',
+    organism: 'Narcissus pseudonarcissus',
+    commonName: 'Daffodil',
+    location: 'Plastid',
+    type: 'Enzyme',
+    properties: ['Carotenoid biosynthesis', 'Vitamin A precursor', 'Nutritional enhancement'],
+    applications: ['Nutritional improvement', 'Vitamin A deficiency', 'Biofortification']
+  },
+
+  // VACCINE DEVELOPMENT - Disease prevention
+  {
+    id: 'v001',
+    name: 'Spike Protein',
+    function: 'Viral entry and receptor binding',
+    organism: 'SARS-CoV-2',
+    commonName: 'COVID-19 Virus',
+    location: 'Viral genome',
+    type: 'Surface protein',
+    properties: ['Receptor binding', 'Membrane fusion', 'Immunogenic'],
+    applications: ['Vaccine development', 'Antiviral research', 'Diagnostic development']
+  },
+  {
+    id: 'v002',
+    name: 'Hepatitis B Surface Antigen',
+    function: 'Viral surface protein for immunity',
+    organism: 'Hepatitis B virus',
+    commonName: 'HBV',
+    location: 'Viral genome',
+    type: 'Surface protein',
+    properties: ['Immunogenic', 'Vaccine antigen', 'Protective immunity'],
+    applications: ['Hepatitis B vaccine', 'Recombinant vaccines', 'Immunization']
+  },
+
+  // BIOSENSORS - Detection systems
+  {
+    id: 'bs001',
+    name: 'Luciferase',
+    function: 'ATP-dependent light-emitting enzyme',
+    organism: 'Photinus pyralis',
+    commonName: 'Firefly',
+    location: 'Lantern organ',
+    type: 'Enzyme',
+    properties: ['Bioluminescence', 'ATP detection', 'Real-time monitoring'],
+    applications: ['Reporter assays', 'ATP detection', 'Biosensors']
+  },
+  {
+    id: 'bs002',
+    name: 'Beta-Galactosidase',
+    function: 'Colorimetric reporter enzyme',
+    organism: 'Escherichia coli',
+    commonName: 'E. coli Bacteria',
+    location: 'lac operon',
+    type: 'Enzyme',
+    properties: ['Blue-white screening', 'Colorimetric detection', 'Reporter gene'],
+    applications: ['Gene expression analysis', 'Cloning', 'Biotechnology screening']
+  },
+
+  // FOOD BIOTECHNOLOGY - Food production
+  {
+    id: 'fb001',
+    name: 'Chymosin',
+    function: 'Milk-clotting enzyme for cheese production',
+    organism: 'Bos taurus',
+    commonName: 'Cattle',
+    location: 'Stomach',
+    type: 'Enzyme',
+    properties: ['Milk coagulation', 'Protein cleavage', 'Food processing'],
+    applications: ['Cheese production', 'Food industry', 'Recombinant enzymes']
+  },
+
+  // ENVIRONMENTAL BIOTECHNOLOGY - Cleanup applications
+  {
+    id: 'eb001',
+    name: 'Laccase',
+    function: 'Lignin-degrading enzyme',
+    organism: 'Trametes versicolor',
+    commonName: 'Turkey Tail Mushroom',
+    location: 'Fungal mycelium',
+    type: 'Enzyme',
+    properties: ['Lignin degradation', 'Oxidative enzyme', 'Environmental cleanup'],
+    applications: ['Bioremediation', 'Paper industry', 'Environmental cleanup']
+  },
+
+  // NEUROSCIENCE - Brain research
+  {
+    id: 'ns001',
+    name: 'Channelrhodopsin-2',
+    function: 'Light-activated ion channel',
+    organism: 'Chlamydomonas reinhardtii',
+    commonName: 'Green Algae',
+    location: 'Eyespot',
+    type: 'Ion channel',
+    properties: ['Light activation', 'Cation channel', 'Optogenetics'],
+    applications: ['Optogenetics', 'Neuroscience research', 'Neural control']
+  },
+
+  // TISSUE ENGINEERING - Regenerative medicine
+  {
+    id: 'te001',
+    name: 'Collagen Type I',
+    function: 'Major structural protein in connective tissue',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome 17q21.33',
+    type: 'Structural protein',
+    properties: ['Tissue scaffolding', 'Mechanical strength', 'Biocompatibility'],
+    applications: ['Tissue engineering', 'Wound healing', 'Biomaterials']
+  },
+
+  // BIOPLASTICS - Sustainable materials
+  {
+    id: 'bp001',
+    name: 'PHA Synthase',
+    function: 'Polyhydroxyalkanoate synthesis',
+    organism: 'Cupriavidus necator',
+    commonName: 'Hydrogen Bacteria',
+    location: 'Bacterial chromosome',
+    type: 'Enzyme',
+    properties: ['Bioplastic production', 'Carbon storage', 'Biodegradable polymer'],
+    applications: ['Biodegradable plastics', 'Sustainable materials', 'Green chemistry']
+  },
+
+  // MARINE BIOTECHNOLOGY - Ocean resources
+  {
+    id: 'mb001',
+    name: 'Antifreeze Protein',
+    function: 'Ice-binding protein for freeze protection',
+    organism: 'Pseudopleuronectes americanus',
+    commonName: 'Winter Flounder',
+    location: 'Blood and tissues',
+    type: 'Structural protein',
+    properties: ['Ice binding', 'Freeze protection', 'Thermal hysteresis'],
+    applications: ['Food preservation', 'Cryoprotection', 'Industrial applications']
+  },
+
+  // COSMETICS - Beauty industry
+  {
+    id: 'cos001',
+    name: 'Hyaluronic Acid Synthase',
+    function: 'Hyaluronic acid production',
+    organism: 'Streptococcus equi',
+    commonName: 'Streptococcus Bacteria',
+    location: 'Bacterial chromosome',
+    type: 'Enzyme',
+    properties: ['Polysaccharide synthesis', 'Skin hydration', 'Tissue repair'],
+    applications: ['Cosmetics', 'Medical devices', 'Tissue engineering']
+  },
+
+  // PROBIOTICS - Gut health
+  {
+    id: 'prob001',
+    name: 'Bacteriocin',
+    function: 'Antimicrobial peptide production',
+    organism: 'Lactobacillus plantarum',
+    commonName: 'Lactobacillus',
+    location: 'Bacterial chromosome',
+    type: 'Antimicrobial peptide',
+    properties: ['Antimicrobial activity', 'Food preservation', 'Gut health'],
+    applications: ['Probiotics', 'Food preservation', 'Microbiome research']
+  },
+
+  // FLAVOR & FRAGRANCE - Sensory enhancement
+  {
+    id: 'ff001',
+    name: 'Limonene Synthase',
+    function: 'Monoterpene synthesis for citrus flavor',
+    organism: 'Citrus limon',
+    commonName: 'Lemon',
+    location: 'Oil glands',
+    type: 'Enzyme',
+    properties: ['Terpene synthesis', 'Flavor compound', 'Aromatic production'],
+    applications: ['Flavor industry', 'Fragrance production', 'Natural products']
+  },
+
+  // BIOMINING - Metal recovery
+  {
+    id: 'bm001',
+    name: 'Metallothionein',
+    function: 'Metal-binding protein for detoxification',
+    organism: 'Saccharomyces cerevisiae',
+    commonName: 'Baker\'s Yeast',
+    location: 'Chromosome XVI',
+    type: 'Metal-binding protein',
+    properties: ['Metal tolerance', 'Detoxification', 'Stress response'],
+    applications: ['Biomining', 'Metal recovery', 'Environmental cleanup']
+  },
+
+  // DIAGNOSTIC GENES - Medical testing
+  {
+    id: 'dg001',
+    name: 'HRP',
+    function: 'Horseradish peroxidase',
+    organism: 'Armoracia rusticana',
+    commonName: 'Horseradish',
+    location: 'Root tissue',
+    type: 'Enzyme',
+    properties: ['Peroxidase activity', 'Colorimetric detection', 'Stable enzyme'],
+    applications: ['ELISA assays', 'Western blotting', 'Diagnostic kits']
+  },
+
+  // METABOLIC DISEASE - Genetic disorders
+  {
+    id: 'md001',
+    name: 'Phenylalanine Hydroxylase',
+    function: 'Phenylalanine to tyrosine conversion',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome 12q23.2',
+    type: 'Enzyme',
+    properties: ['Amino acid metabolism', 'Cofactor dependent', 'Liver expression'],
+    diseases: ['Phenylketonuria (PKU)'],
+    applications: ['PKU treatment', 'Metabolic engineering', 'Enzyme therapy']
+  },
+
+  // BIOFUEL PRODUCTION - Energy applications
+  {
+    id: 'bf001',
+    name: 'Cellulase',
+    function: 'Cellulose-degrading enzyme complex',
+    organism: 'Trichoderma reesei',
+    commonName: 'Trichoderma Fungus',
+    location: 'Fungal genome',
+    type: 'Enzyme',
+    properties: ['Cellulose hydrolysis', 'Biomass conversion', 'Industrial enzyme'],
+    applications: ['Biofuel production', 'Biomass processing', 'Green energy']
+  },
+
+  // SYNTHETIC BIOLOGY - Engineered systems
+  {
+    id: 'sb001',
+    name: 'T7 RNA Polymerase',
+    function: 'Highly specific RNA polymerase',
+    organism: 'Bacteriophage T7',
+    commonName: 'T7 Phage',
+    location: 'Viral genome',
+    type: 'Enzyme',
+    properties: ['High specificity', 'Orthogonal system', 'Rapid transcription'],
+    applications: ['Synthetic circuits', 'Orthogonal expression', 'Biotechnology tools']
+  },
+
+  // SELECTION MARKERS - Laboratory tools
   {
     id: 'sm001',
     name: 'neoR',
@@ -330,7 +850,7 @@ export const geneDatabase: Gene[] = [
     applications: ['Mammalian cell selection', 'Plant transformation', 'Stable cell lines']
   },
 
-  // PROMOTERS (Regulatory sequences)
+  // PROMOTERS - Regulatory sequences
   {
     id: 'pr001',
     name: 'CMV Promoter',
@@ -354,457 +874,164 @@ export const geneDatabase: Gene[] = [
     applications: ['Protein expression', 'In vitro transcription', 'Recombinant systems']
   },
 
-  // THERAPEUTIC GENES
+  // MODEL ORGANISM GENES - Research tools
   {
-    id: 't001',
-    name: 'CFTR',
-    function: 'Cystic fibrosis transmembrane conductance regulator',
-    organism: 'Homo sapiens',
-    commonName: 'Human',
-    location: 'Chromosome 7q31.2',
-    type: 'Ion channel',
-    properties: ['Chloride transport', 'Membrane protein', 'ATP-binding'],
-    diseases: ['Cystic fibrosis'],
-    applications: ['Gene therapy', 'CF treatment', 'Ion channel research']
+    id: 'mo001',
+    name: 'White Gene',
+    function: 'Eye pigmentation in fruit flies',
+    organism: 'Drosophila melanogaster',
+    commonName: 'Fruit Fly',
+    location: 'X chromosome',
+    type: 'Pigmentation gene',
+    properties: ['Eye color', 'Genetic marker', 'Transformation marker'],
+    applications: ['Genetic research', 'Transformation', 'Developmental biology']
   },
   {
-    id: 't002',
-    name: 'Dystrophin',
-    function: 'Muscle fiber structural protein',
-    organism: 'Homo sapiens',
-    commonName: 'Human',
-    location: 'Chromosome Xp21.2',
+    id: 'mo002',
+    name: 'unc-22',
+    function: 'Muscle protein twitchin',
+    organism: 'Caenorhabditis elegans',
+    commonName: 'Roundworm',
+    location: 'Chromosome IV',
     type: 'Structural protein',
-    properties: ['Muscle integrity', 'Cytoskeletal protein', 'Large gene'],
-    diseases: ['Duchenne muscular dystrophy', 'Becker muscular dystrophy'],
-    applications: ['Gene therapy', 'Muscle disease research', 'Therapeutic development']
+    properties: ['Muscle function', 'Twitching phenotype', 'Large protein'],
+    applications: ['Neurobiology research', 'Muscle studies', 'Genetic screens']
   },
 
-  // METABOLIC ENGINEERING GENES
+  // ZEBRAFISH GENES - Developmental biology
   {
-    id: 'me001',
-    name: 'ACC1',
-    function: 'Acetyl-CoA carboxylase',
+    id: 'zf001',
+    name: 'sonic hedgehog',
+    function: 'Developmental signaling protein',
+    organism: 'Danio rerio',
+    commonName: 'Zebrafish',
+    location: 'Chromosome 7',
+    type: 'Signaling protein',
+    properties: ['Pattern formation', 'Neural development', 'Morphogen'],
+    applications: ['Developmental biology', 'Disease modeling', 'Drug screening']
+  },
+
+  // MOUSE GENES - Mammalian research
+  {
+    id: 'ms001',
+    name: 'p53',
+    function: 'Tumor suppressor protein',
+    organism: 'Mus musculus',
+    commonName: 'Mouse',
+    location: 'Chromosome 11',
+    type: 'Tumor suppressor',
+    properties: ['DNA damage response', 'Cell cycle control', 'Apoptosis'],
+    applications: ['Cancer research', 'Drug testing', 'Disease modeling']
+  },
+
+  // ARABIDOPSIS GENES - Plant model
+  {
+    id: 'at001',
+    name: 'FLOWERING LOCUS T',
+    function: 'Flowering time control',
+    organism: 'Arabidopsis thaliana',
+    commonName: 'Thale Cress',
+    location: 'Chromosome 1',
+    type: 'Signaling protein',
+    properties: ['Flowering induction', 'Mobile signal', 'Photoperiod response'],
+    applications: ['Plant breeding', 'Crop timing', 'Developmental research']
+  },
+
+  // ADDITIONAL HUMAN GENES - Medical importance
+  {
+    id: 'h011',
+    name: 'BRCA2',
+    function: 'DNA repair and tumor suppression',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome 13q13.1',
+    type: 'Tumor suppressor',
+    properties: ['DNA repair', 'Homologous recombination', 'Cancer prevention'],
+    diseases: ['Breast cancer', 'Ovarian cancer'],
+    applications: ['Cancer research', 'Genetic testing', 'Personalized medicine']
+  },
+  {
+    id: 'h012',
+    name: 'Huntingtin',
+    function: 'Neuronal function and development',
+    organism: 'Homo sapiens',
+    commonName: 'Human',
+    location: 'Chromosome 4p16.3',
+    type: 'Structural protein',
+    properties: ['Neuronal transport', 'Development', 'Protein interactions'],
+    diseases: ['Huntington\'s disease'],
+    applications: ['Neurological research', 'Drug development', 'Gene therapy']
+  },
+
+  // ADDITIONAL E. COLI GENES - Laboratory essentials
+  {
+    id: 'e006',
+    name: 'recA',
+    function: 'DNA repair and recombination',
+    organism: 'Escherichia coli',
+    commonName: 'E. coli Bacteria',
+    location: 'Bacterial chromosome',
+    type: 'DNA repair protein',
+    properties: ['DNA repair', 'Recombination', 'SOS response'],
+    applications: ['DNA repair research', 'Recombination studies', 'Biotechnology']
+  },
+  {
+    id: 'e007',
+    name: 'malE',
+    function: 'Maltose-binding protein',
+    organism: 'Escherichia coli',
+    commonName: 'E. coli Bacteria',
+    location: 'Bacterial chromosome',
+    type: 'Binding protein',
+    properties: ['Maltose transport', 'Fusion partner', 'Protein purification'],
+    applications: ['Protein expression', 'Purification tags', 'Structural biology']
+  },
+
+  // ADDITIONAL YEAST GENES - Biotechnology workhorses
+  {
+    id: 'y005',
+    name: 'ADH1',
+    function: 'Alcohol dehydrogenase',
     organism: 'Saccharomyces cerevisiae',
     commonName: 'Baker\'s Yeast',
-    location: 'Chromosome VII',
+    location: 'Chromosome XV',
     type: 'Enzyme',
-    properties: ['Fatty acid synthesis', 'Metabolic regulation', 'Biotin-dependent'],
-    applications: ['Biofuel production', 'Metabolic engineering', 'Lipid biosynthesis']
+    properties: ['Ethanol metabolism', 'Strong promoter', 'Constitutive expression'],
+    applications: ['Protein expression', 'Metabolic engineering', 'Biofuel production']
   },
-
-  // PLANT BIOTECHNOLOGY GENES
   {
-    id: 'pb001',
-    name: 'Bar Gene',
-    function: 'Phosphinothricin acetyltransferase',
-    organism: 'Streptomyces hygroscopicus',
-    commonName: 'Streptomyces Bacteria',
-    location: 'Bacterial chromosome',
+    id: 'y006',
+    name: 'TRP1',
+    function: 'Phosphoribosylanthranilate isomerase',
+    organism: 'Saccharomyces cerevisiae',
+    commonName: 'Baker\'s Yeast',
+    location: 'Chromosome IV',
     type: 'Enzyme',
-    properties: ['Herbicide resistance', 'Glufosinate tolerance', 'Selection marker'],
-    applications: ['Herbicide-resistant crops', 'Plant transformation', 'Agricultural biotechnology']
+    properties: ['Tryptophan biosynthesis', 'Selection marker', 'Auxotrophy complementation'],
+    applications: ['Yeast transformation', 'Genetic complementation', 'Metabolic studies']
   },
 
-  // VACCINE DEVELOPMENT GENES
+  // ADDITIONAL PLANT GENES - Crop improvement
   {
-    id: 'v001',
-    name: 'Spike Protein',
-    function: 'Viral entry and receptor binding',
-    organism: 'SARS-CoV-2',
-    commonName: 'COVID-19 Virus',
-    location: 'Viral genome',
-    type: 'Surface protein',
-    properties: ['Receptor binding', 'Membrane fusion', 'Immunogenic'],
-    applications: ['Vaccine development', 'Antiviral research', 'Diagnostic development']
-  },
-
-  // BIOSENSOR GENES
-  {
-    id: 'bs001',
-    name: 'Luciferase',
-    function: 'ATP-dependent light-emitting enzyme',
-    organism: 'Photinus pyralis',
-    commonName: 'Firefly',
-    location: 'Lantern organ',
-    type: 'Enzyme',
-    properties: ['Bioluminescence', 'ATP detection', 'Real-time monitoring'],
-    applications: ['Reporter assays', 'ATP detection', 'Biosensors']
-  },
-
-  // STEM CELL GENES
-  {
-    id: 'sc001',
-    name: 'Oct4',
-    function: 'Pluripotency transcription factor',
-    organism: 'Homo sapiens',
-    commonName: 'Human',
-    location: 'Chromosome 6p21.31',
-    type: 'Transcription factor',
-    properties: ['Pluripotency maintenance', 'Stem cell identity', 'Reprogramming'],
-    applications: ['iPSC generation', 'Stem cell research', 'Regenerative medicine']
-  },
-  {
-    id: 'sc002',
-    name: 'Sox2',
-    function: 'SRY-box transcription factor 2',
-    organism: 'Homo sapiens',
-    commonName: 'Human',
-    location: 'Chromosome 3q26.33',
-    type: 'Transcription factor',
-    properties: ['Neural development', 'Pluripotency', 'Cell fate determination'],
-    applications: ['iPSC generation', 'Neural differentiation', 'Developmental biology']
-  },
-
-  // CANCER RESEARCH GENES
-  {
-    id: 'cr001',
-    name: 'EGFR',
-    function: 'Epidermal growth factor receptor',
-    organism: 'Homo sapiens',
-    commonName: 'Human',
-    location: 'Chromosome 7p11.2',
-    type: 'Receptor',
-    properties: ['Growth signaling', 'Tyrosine kinase', 'Cell proliferation'],
-    diseases: ['Various cancers', 'EGFR mutations'],
-    applications: ['Cancer therapy', 'Drug targets', 'Biomarker research']
-  },
-
-  // IMMUNOTHERAPY GENES
-  {
-    id: 'it001',
-    name: 'CAR',
-    function: 'Chimeric antigen receptor',
-    organism: 'Synthetic construct',
-    commonName: 'Engineered',
-    location: 'Synthetic',
-    type: 'Receptor',
-    properties: ['Antigen recognition', 'T cell activation', 'Targeted therapy'],
-    applications: ['CAR-T therapy', 'Cancer immunotherapy', 'Adoptive cell therapy']
-  },
-
-  // AGRICULTURAL ENHANCEMENT GENES
-  {
-    id: 'ag001',
-    name: 'Golden Rice PSY',
-    function: 'Phytoene synthase for beta-carotene',
-    organism: 'Narcissus pseudonarcissus',
-    commonName: 'Daffodil',
-    location: 'Plastid',
-    type: 'Enzyme',
-    properties: ['Carotenoid biosynthesis', 'Vitamin A precursor', 'Nutritional enhancement'],
-    applications: ['Nutritional improvement', 'Vitamin A deficiency', 'Biofortification']
-  },
-
-  // BIOFUEL GENES
-  {
-    id: 'bf001',
-    name: 'Cellulase',
-    function: 'Cellulose-degrading enzyme complex',
-    organism: 'Trichoderma reesei',
-    commonName: 'Trichoderma Fungus',
-    location: 'Fungal genome',
-    type: 'Enzyme',
-    properties: ['Cellulose hydrolysis', 'Biomass conversion', 'Industrial enzyme'],
-    applications: ['Biofuel production', 'Biomass processing', 'Green energy']
-  },
-
-  // SYNTHETIC BIOLOGY GENES
-  {
-    id: 'sb001',
-    name: 'T7 RNA Polymerase',
-    function: 'Highly specific RNA polymerase',
-    organism: 'Bacteriophage T7',
-    commonName: 'T7 Phage',
-    location: 'Viral genome',
-    type: 'Enzyme',
-    properties: ['High specificity', 'Orthogonal system', 'Rapid transcription'],
-    applications: ['Synthetic circuits', 'Orthogonal expression', 'Biotechnology tools']
-  },
-
-  // MARINE BIOTECHNOLOGY GENES
-  {
-    id: 'mb001',
-    name: 'Antifreeze Protein',
-    function: 'Ice-binding protein for freeze protection',
-    organism: 'Pseudopleuronectes americanus',
-    commonName: 'Winter Flounder',
-    location: 'Blood and tissues',
-    type: 'Structural protein',
-    properties: ['Ice binding', 'Freeze protection', 'Thermal hysteresis'],
-    applications: ['Food preservation', 'Cryoprotection', 'Industrial applications']
-  },
-
-  // PHARMACEUTICAL PRODUCTION GENES
-  {
-    id: 'pp001',
-    name: 'Interferon Alpha',
-    function: 'Antiviral and immunomodulatory protein',
-    organism: 'Homo sapiens',
-    commonName: 'Human',
-    location: 'Chromosome 9p21.3',
-    type: 'Cytokine',
-    properties: ['Antiviral activity', 'Immune modulation', 'Cell signaling'],
-    applications: ['Antiviral therapy', 'Cancer treatment', 'Immune disorders']
-  },
-
-  // DIAGNOSTIC GENES
-  {
-    id: 'dg001',
-    name: 'HRP',
-    function: 'Horseradish peroxidase',
-    organism: 'Armoracia rusticana',
-    commonName: 'Horseradish',
-    location: 'Root tissue',
-    type: 'Enzyme',
-    properties: ['Peroxidase activity', 'Colorimetric detection', 'Stable enzyme'],
-    applications: ['ELISA assays', 'Western blotting', 'Diagnostic kits']
-  },
-
-  // FOOD BIOTECHNOLOGY GENES
-  {
-    id: 'fb001',
-    name: 'Chymosin',
-    function: 'Milk-clotting enzyme for cheese production',
-    organism: 'Bos taurus',
-    commonName: 'Cattle',
-    location: 'Stomach',
-    type: 'Enzyme',
-    properties: ['Milk coagulation', 'Protein cleavage', 'Food processing'],
-    applications: ['Cheese production', 'Food industry', 'Recombinant enzymes']
-  },
-
-  // ENVIRONMENTAL BIOTECHNOLOGY GENES
-  {
-    id: 'eb001',
-    name: 'Laccase',
-    function: 'Lignin-degrading enzyme',
-    organism: 'Trametes versicolor',
-    commonName: 'Turkey Tail Mushroom',
-    location: 'Fungal mycelium',
-    type: 'Enzyme',
-    properties: ['Lignin degradation', 'Oxidative enzyme', 'Environmental cleanup'],
-    applications: ['Bioremediation', 'Paper industry', 'Environmental cleanup']
-  },
-
-  // NEUROSCIENCE GENES
-  {
-    id: 'ns001',
-    name: 'Channelrhodopsin-2',
-    function: 'Light-activated ion channel',
-    organism: 'Chlamydomonas reinhardtii',
-    commonName: 'Green Algae',
-    location: 'Eyespot',
-    type: 'Ion channel',
-    properties: ['Light activation', 'Cation channel', 'Optogenetics'],
-    applications: ['Optogenetics', 'Neuroscience research', 'Neural control']
-  },
-
-  // AGING RESEARCH GENES
-  {
-    id: 'ar001',
-    name: 'Telomerase (TERT)',
-    function: 'Telomere extension enzyme',
-    organism: 'Homo sapiens',
-    commonName: 'Human',
-    location: 'Chromosome 5p15.33',
-    type: 'Enzyme',
-    properties: ['Telomere maintenance', 'Cellular immortalization', 'Aging regulation'],
-    applications: ['Aging research', 'Cancer research', 'Regenerative medicine']
-  },
-
-  // PLANT DEFENSE GENES
-  {
-    id: 'pd001',
+    id: 'p005',
     name: 'Chitinase',
     function: 'Chitin-degrading enzyme for pathogen defense',
     organism: 'Nicotiana tabacum',
     commonName: 'Tobacco',
-    location: 'Chromosome',
+    location: 'Plant genome',
     type: 'Enzyme',
     properties: ['Antifungal activity', 'Pathogen resistance', 'Cell wall degradation'],
     applications: ['Disease-resistant crops', 'Biopesticides', 'Plant protection']
   },
-
-  // TISSUE ENGINEERING GENES
   {
-    id: 'te001',
-    name: 'Collagen Type I',
-    function: 'Major structural protein in connective tissue',
-    organism: 'Homo sapiens',
-    commonName: 'Human',
-    location: 'Chromosome 17q21.33',
-    type: 'Structural protein',
-    properties: ['Tissue scaffolding', 'Mechanical strength', 'Biocompatibility'],
-    applications: ['Tissue engineering', 'Wound healing', 'Biomaterials']
-  },
-
-  // METABOLIC DISEASE GENES
-  {
-    id: 'md001',
-    name: 'Phenylalanine Hydroxylase',
-    function: 'Phenylalanine to tyrosine conversion',
-    organism: 'Homo sapiens',
-    commonName: 'Human',
-    location: 'Chromosome 12q23.2',
+    id: 'p006',
+    name: 'Rubisco',
+    function: 'CO2 fixation enzyme',
+    organism: 'Spinacia oleracea',
+    commonName: 'Spinach',
+    location: 'Chloroplast',
     type: 'Enzyme',
-    properties: ['Amino acid metabolism', 'Cofactor dependent', 'Liver expression'],
-    diseases: ['Phenylketonuria (PKU)'],
-    applications: ['PKU treatment', 'Metabolic engineering', 'Enzyme therapy']
-  },
-
-  // BIOPLASTIC GENES
-  {
-    id: 'bp001',
-    name: 'PHA Synthase',
-    function: 'Polyhydroxyalkanoate synthesis',
-    organism: 'Cupriavidus necator',
-    commonName: 'Hydrogen Bacteria',
-    location: 'Bacterial chromosome',
-    type: 'Enzyme',
-    properties: ['Bioplastic production', 'Carbon storage', 'Biodegradable polymer'],
-    applications: ['Biodegradable plastics', 'Sustainable materials', 'Green chemistry']
-  },
-
-  // FLAVOR AND FRAGRANCE GENES
-  {
-    id: 'ff001',
-    name: 'Limonene Synthase',
-    function: 'Monoterpene synthesis for citrus flavor',
-    organism: 'Citrus limon',
-    commonName: 'Lemon',
-    location: 'Oil glands',
-    type: 'Enzyme',
-    properties: ['Terpene synthesis', 'Flavor compound', 'Aromatic production'],
-    applications: ['Flavor industry', 'Fragrance production', 'Natural products']
-  },
-
-  // PROBIOTIC GENES
-  {
-    id: 'prob001',
-    name: 'Bacteriocin',
-    function: 'Antimicrobial peptide production',
-    organism: 'Lactobacillus plantarum',
-    commonName: 'Lactobacillus',
-    location: 'Bacterial chromosome',
-    type: 'Antimicrobial peptide',
-    properties: ['Antimicrobial activity', 'Food preservation', 'Gut health'],
-    applications: ['Probiotics', 'Food preservation', 'Microbiome research']
-  },
-
-  // BIOMINING GENES
-  {
-    id: 'bm001',
-    name: 'Metallothionein',
-    function: 'Metal-binding protein for detoxification',
-    organism: 'Saccharomyces cerevisiae',
-    commonName: 'Baker\'s Yeast',
-    location: 'Chromosome XVI',
-    type: 'Metal-binding protein',
-    properties: ['Metal tolerance', 'Detoxification', 'Stress response'],
-    applications: ['Biomining', 'Metal recovery', 'Environmental cleanup']
-  },
-
-  // COSMETIC GENES
-  {
-    id: 'cos001',
-    name: 'Hyaluronic Acid Synthase',
-    function: 'Hyaluronic acid production',
-    organism: 'Streptococcus equi',
-    commonName: 'Streptococcus Bacteria',
-    location: 'Bacterial chromosome',
-    type: 'Enzyme',
-    properties: ['Polysaccharide synthesis', 'Skin hydration', 'Tissue repair'],
-    applications: ['Cosmetics', 'Medical devices', 'Tissue engineering']
-  },
-
-  // ADDITIONAL SUNFLOWER GENES (More of your favorites!)
-  {
-    id: 's006',
-    name: 'HaHSP70',
-    function: 'Heat shock protein for stress tolerance',
-    organism: 'Helianthus annuus',
-    commonName: 'Sunflower',
-    location: 'Chromosome 12',
-    type: 'Chaperone protein',
-    properties: ['Heat tolerance', 'Protein folding', 'Stress response'],
-    applications: ['Heat-resistant crops', 'Climate adaptation', 'Stress biology']
-  },
-  {
-    id: 's007',
-    name: 'HaCAT',
-    function: 'Catalase for oxidative stress protection',
-    organism: 'Helianthus annuus',
-    commonName: 'Sunflower',
-    location: 'Chromosome 3',
-    type: 'Enzyme',
-    properties: ['Antioxidant activity', 'ROS scavenging', 'Stress tolerance'],
-    applications: ['Stress-resistant crops', 'Antioxidant research', 'Plant protection']
-  },
-  {
-    id: 's008',
-    name: 'HaAPX',
-    function: 'Ascorbate peroxidase for antioxidant defense',
-    organism: 'Helianthus annuus',
-    commonName: 'Sunflower',
-    location: 'Chromosome 7',
-    type: 'Enzyme',
-    properties: ['Ascorbate oxidation', 'ROS detoxification', 'Chloroplast protection'],
-    applications: ['Oxidative stress research', 'Crop improvement', 'Photosynthesis enhancement']
-  },
-  {
-    id: 's009',
-    name: 'HaNHX1',
-    function: 'Sodium/hydrogen antiporter for salt tolerance',
-    organism: 'Helianthus annuus',
-    commonName: 'Sunflower',
-    location: 'Chromosome 15',
-    type: 'Transporter',
-    properties: ['Salt tolerance', 'Ion homeostasis', 'Osmotic adjustment'],
-    applications: ['Salt-tolerant crops', 'Saline agriculture', 'Stress physiology']
-  },
-  {
-    id: 's010',
-    name: 'HaLEA',
-    function: 'Late embryogenesis abundant protein',
-    organism: 'Helianthus annuus',
-    commonName: 'Sunflower',
-    location: 'Chromosome 9',
-    type: 'Protective protein',
-    properties: ['Desiccation tolerance', 'Seed maturation', 'Stress protection'],
-    applications: ['Drought tolerance', 'Seed technology', 'Stress biology']
+    properties: ['Carbon fixation', 'Photosynthesis', 'Most abundant protein'],
+    applications: ['Photosynthesis enhancement', 'Climate change research', 'Crop improvement']
   }
-
-  // Note: This represents a sample of the 5000+ genes that would be included
-  // In a full implementation, this would continue with comprehensive coverage of:
-  // - All major model organisms
-  // - Industrial biotechnology genes
-  // - Therapeutic targets
-  // - Agricultural traits
-  // - Environmental applications
-  // - Synthetic biology parts
-  // - And many more categories
 ];
-
-// Function to generate additional genes programmatically
-export const generateAdditionalGenes = (): Gene[] => {
-  const additionalGenes: Gene[] = [];
-  
-  // Generate more genes for common organisms
-  const organisms = [
-    { name: 'Escherichia coli', common: 'E. coli Bacteria' },
-    { name: 'Saccharomyces cerevisiae', common: 'Baker\'s Yeast' },
-    { name: 'Homo sapiens', common: 'Human' },
-    { name: 'Mus musculus', common: 'Mouse' },
-    { name: 'Arabidopsis thaliana', common: 'Thale Cress' },
-    { name: 'Drosophila melanogaster', common: 'Fruit Fly' },
-    { name: 'Caenorhabditis elegans', common: 'Roundworm' },
-    { name: 'Danio rerio', common: 'Zebrafish' }
-  ];
-
-  // This would generate thousands more genes in a real implementation
-  return additionalGenes;
-};
-
-// Export the complete database
-export const completeGeneDatabase = [...geneDatabase, ...generateAdditionalGenes()];
