@@ -65,8 +65,9 @@ export default function GeneLibrary() {
   // Load experiments from localStorage on component mount
   useEffect(() => {
     try {
-      // Get current user ID from auth context or localStorage
-      const userId = localStorage.getItem('currentUserId') || 'anonymous';
+      // Get current user ID from auth context
+      const userId = localStorage.getItem('currentUser') ? 
+        JSON.parse(localStorage.getItem('currentUser')!).uid : 'anonymous';
       const userKey = `savedExperiments_${userId}`;
       const savedExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
       
@@ -79,12 +80,44 @@ export default function GeneLibrary() {
           }
         });
         setExperiments(combinedExperiments);
+      } else {
+        setExperiments(sampleExperiments);
       }
     } catch (error) {
       console.error('Failed to load experiments:', error);
       setExperiments(sampleExperiments);
     }
   }, []);
+
+  // Add new experiment function
+  const addNewExperiment = () => {
+    const newExperiment: SavedExperiment = {
+      id: `new_${Date.now()}`,
+      name: 'New Experiment',
+      organism: 'Custom Organism',
+      genes: ['Sample Gene'],
+      viability: 50,
+      dateCreated: new Date().toISOString().split('T')[0],
+      properties: ['Custom property'],
+      type: 'partial'
+    };
+    
+    const updatedExperiments = [newExperiment, ...experiments];
+    setExperiments(updatedExperiments);
+    setSelectedExperiment(newExperiment);
+    
+    // Save to localStorage
+    try {
+      const userId = localStorage.getItem('currentUser') ? 
+        JSON.parse(localStorage.getItem('currentUser')!).uid : 'anonymous';
+      const userKey = `savedExperiments_${userId}`;
+      const userExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
+      userExperiments.unshift(newExperiment);
+      localStorage.setItem(userKey, JSON.stringify(userExperiments));
+    } catch (error) {
+      console.error('Failed to save new experiment:', error);
+    }
+  };
 
   const shareExperiment = async (experiment: SavedExperiment) => {
     const shareData = {
@@ -195,11 +228,17 @@ export default function GeneLibrary() {
     const updatedExperiments = experiments.filter(exp => exp.id !== experimentId);
     setExperiments(updatedExperiments);
     
-    // Update localStorage (only remove user-created experiments)
-    const userKey = `savedExperiments_${localStorage.getItem('currentUserId') || 'anonymous'}`;
-    const savedExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
-    const updatedSaved = savedExperiments.filter((exp: SavedExperiment) => exp.id !== experimentId);
-    localStorage.setItem(userKey, JSON.stringify(updatedSaved));
+    // Update localStorage
+    try {
+      const userId = localStorage.getItem('currentUser') ? 
+        JSON.parse(localStorage.getItem('currentUser')!).uid : 'anonymous';
+      const userKey = `savedExperiments_${userId}`;
+      const savedExperiments = JSON.parse(localStorage.getItem(userKey) || '[]');
+      const updatedSaved = savedExperiments.filter((exp: SavedExperiment) => exp.id !== experimentId);
+      localStorage.setItem(userKey, JSON.stringify(updatedSaved));
+    } catch (error) {
+      console.error('Failed to update localStorage:', error);
+    }
     
     // Clear selection if deleted experiment was selected
     if (selectedExperiment?.id === experimentId) {
@@ -236,6 +275,13 @@ export default function GeneLibrary() {
               <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors">
                 <Plus className="w-4 h-4" />
                 <span>New Experiment</span>
+              </button>
+              <button 
+                onClick={addNewExperiment}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Quick Add</span>
               </button>
             </div>
           </div>

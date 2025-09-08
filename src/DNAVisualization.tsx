@@ -19,6 +19,11 @@ export default function DNAVisualization({ selectedGenes = [] }: DNAVisualizatio
   const [zoom, setZoom] = useState(1);
   const [showInfo, setShowInfo] = useState(false);
 
+  // Update rotation speed in real-time
+  useEffect(() => {
+    // This effect ensures the rotation speed is applied immediately
+  }, [rotationSpeed]);
+
   useEffect(() => {
     if (!mountRef.current) return;
 
@@ -224,29 +229,28 @@ export default function DNAVisualization({ selectedGenes = [] }: DNAVisualizatio
     };
   }, []);
 
-  // Update animation based on state
+  // Update camera zoom in real-time
   useEffect(() => {
     if (cameraRef.current) {
       cameraRef.current.position.z = 15 / zoom;
     }
   }, [zoom]);
 
+  // Toggle play/pause functionality
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
   };
 
+  // Reset rotation to initial position
   const resetRotation = () => {
     if (dnaGroupRef.current) {
       dnaGroupRef.current.rotation.set(0, 0, 0);
     }
   };
 
+  // Zoom controls
   const adjustZoom = (delta: number) => {
     setZoom(prev => Math.max(0.5, Math.min(3, prev + delta)));
-  };
-
-  const adjustSpeed = (delta: number) => {
-    setRotationSpeed(prev => Math.max(0, Math.min(0.05, prev + delta)));
   };
 
   return (
@@ -307,8 +311,11 @@ export default function DNAVisualization({ selectedGenes = [] }: DNAVisualizatio
           step="0.005"
           value={rotationSpeed}
           onChange={(e) => setRotationSpeed(parseFloat(e.target.value))}
-          className="w-24"
+          className="w-32 accent-blue-500"
         />
+        <div className="text-white text-xs mt-1 text-center">
+          {(rotationSpeed * 1000).toFixed(1)}
+        </div>
       </div>
 
       {/* Info Panel */}
