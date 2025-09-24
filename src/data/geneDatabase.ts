@@ -2016,4 +2016,3 @@ const additionalGenes: Gene[] = [
 ];
 
 // Combine original and additional genes
-export const geneDatabase: Gene[] = [...originalGenes, ...additionalGenes];
